@@ -2,10 +2,10 @@ import numpy as np
 import networkx as nx
 
 from copy import deepcopy
-from channel_codes.channel_code_base import ClassicalErrorCorrection
+from decoders import LDPCDecoder
 
 
-class GallagerB(ClassicalErrorCorrection):
+class GallagerB(LDPCDecoder):
 
     """Gallager-B error correction scheme."""
     def __init__(self, ldpc_graph: nx.Graph, maxiter=50, vote_threshold=1):
@@ -14,34 +14,16 @@ class GallagerB(ClassicalErrorCorrection):
         Args:
             ldpc_graph: Tanner graph for the LDPC code.
             maxiter: Maximum no. of decoding iterations.
+            vote_threshold: Voting Threshold for variable nodes.
         """
-
-        # Store input data
         self.maxiter = maxiter
         self.vote_threshold = vote_threshold
         self.ldpc_graph = deepcopy(ldpc_graph)
-
-        # Process LDPC graph
-        self.var_nodes = [node for node, data in ldpc_graph.nodes(data='bipartite') if data == 0]
-        self.check_nodes = [node for node, data in ldpc_graph.nodes(data='bipartite') if data == 1]
-        self.num_checks = len(self.check_nodes)
-        super().__init__(len(self.var_nodes) - self.num_checks, len(self.var_nodes))
-
-    def encode(self, msg: np.ndarray) -> np.ndarray:
-
-        """Encoder implementation.
-        Args:
-            msg: The message bits to be encoded.
-        Returns:
-            Encoded codeword.
-        """
-
-        # Map messeage to codeword TODO
-        return msg
+        super().__init__(self.ldpc_graph)
 
     def decode(self, y: np.ndarray) -> np.ndarray:
 
-        """Encoder implementation.
+        """Decoder implementation.
         Args:
             y: The received channel output.
         Returns:
@@ -102,6 +84,4 @@ class GallagerB(ClassicalErrorCorrection):
         x = np.array([self.ldpc_graph.nodes[f'V{i}']['gamma_posterior'] for i in range(self.block_length)])
         x = np.transpose(x)
         x = ((1 - x) / 2).astype(int)
-
-        # Map codeword to message TODO
         return x
