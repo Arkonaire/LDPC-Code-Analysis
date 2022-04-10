@@ -27,7 +27,7 @@ def read_ldpc_graph(filepath: str) -> nx.Graph:
     for j in range(data[0][1]):
         edgelist_a = set([f'V{i - 1}' for i in data[j + data[0][0] + 1][1:]])
         edgelist_b = set(ldpc_graph[f'C{j}'])
-        assert edgelist_b == edgelist_a, 'Tanner Graph is inconsistent.'
+        assert edgelist_b == edgelist_a, f'Invalid Tanner Graph. Check node C{j} is inconsistent.'
 
     # Return LDPC graph
     return ldpc_graph

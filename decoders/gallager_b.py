@@ -2,7 +2,7 @@ import numpy as np
 import networkx as nx
 
 from copy import deepcopy
-from decoders import LDPCDecoder
+from decoders.ldpc_decoder import LDPCDecoder
 
 
 class GallagerB(LDPCDecoder):
