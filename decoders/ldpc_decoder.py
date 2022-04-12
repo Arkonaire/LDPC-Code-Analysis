@@ -17,7 +17,6 @@ class LDPCDecoder:
         self.check_nodes = [node for node, data in ldpc_graph.nodes(data='bipartite') if data == 1]
         self.num_checks = len(self.check_nodes)
         self.block_length = len(self.var_nodes)
-        self.msg_length = self.block_length - self.num_checks
 
     @abstractmethod
     def decode(self, y: np.ndarray) -> np.ndarray:

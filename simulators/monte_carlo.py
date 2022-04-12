@@ -26,7 +26,7 @@ class MonteCarloSimulator:
         self.num_frame_errors = None
         self.frame_error_rate = None
 
-    def run(self, numtrials=1e7) -> float:
+    def run(self, numtrials=int(1e4)) -> float:
 
         """Run simulator.
         Args:

@@ -16,10 +16,10 @@ class GallagerB(LDPCDecoder):
             maxiter: Maximum no. of decoding iterations.
             vote_threshold: Voting Threshold for variable nodes.
         """
+        super().__init__(ldpc_graph)
         self.maxiter = maxiter
         self.vote_threshold = vote_threshold
         self.ldpc_graph = deepcopy(ldpc_graph)
-        super().__init__(self.ldpc_graph)
 
     def decode(self, y: np.ndarray) -> np.ndarray:
 
