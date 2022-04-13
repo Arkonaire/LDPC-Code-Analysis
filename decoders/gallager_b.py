@@ -8,7 +8,7 @@ from decoders.ldpc_decoder import LDPCDecoder
 class GallagerB(LDPCDecoder):
 
     """Gallager-B error correction scheme."""
-    def __init__(self, ldpc_graph: nx.Graph, maxiter=50, vote_threshold=1):
+    def __init__(self, ldpc_graph: nx.Graph, maxiter=30, vote_threshold=1):
 
         """Initialization.
         Args:
