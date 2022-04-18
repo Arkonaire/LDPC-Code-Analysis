@@ -1,5 +1,5 @@
 import numpy as np
-from channels.channel_base import ClassicalChannel
+from .channel_base import ClassicalChannel
 
 
 class BinarySymmetricChannel(ClassicalChannel):

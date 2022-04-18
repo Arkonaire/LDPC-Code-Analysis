@@ -2,7 +2,7 @@ import numpy as np
 import networkx as nx
 
 from copy import deepcopy
-from encoders.ldpc_encoder import LDPCEncoder
+from .ldpc_encoder import LDPCEncoder
 
 
 class BasicEncoder(LDPCEncoder):

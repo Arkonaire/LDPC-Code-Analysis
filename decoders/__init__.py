@@ -1,5 +1,5 @@
-from decoders.ldpc_decoder import LDPCDecoder
-from decoders.gallager_b import GallagerB
+from .ldpc_decoder import LDPCDecoder
+from .gallager import Gallager
 
 
-__all__ = ['LDPCDecoder', 'GallagerB']
+__all__ = ['LDPCDecoder', 'Gallager']
