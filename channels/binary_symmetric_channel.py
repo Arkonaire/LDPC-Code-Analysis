@@ -23,4 +23,4 @@ class BinarySymmetricChannel(ClassicalChannel):
         """
         e = (np.random.rand(*x.shape) < self.alpha).astype(int)
         y = ((x + e) % 2).astype(int)
-        return y
+        return 1 - 2 * y
