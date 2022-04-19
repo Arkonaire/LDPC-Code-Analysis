@@ -8,7 +8,7 @@ from .ldpc_decoder import LDPCDecoder
 
 class BeliefPropagation(LDPCDecoder):
 
-    """Gallager error correction scheme."""
+    """Belief Propagation error correction scheme."""
     def __init__(self, ldpc_graph: nx.Graph, channel: ClassicalChannel, maxiter=30):
 
         """Initialization.
