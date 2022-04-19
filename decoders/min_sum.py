@@ -59,8 +59,12 @@ class MinSum(LDPCDecoder):
             for edge in self.ldpc_graph.edges:
                 V, C = edge
                 in_messages = np.array([self.ldpc_graph[V][node]['beta'] for node in self.ldpc_graph[V] if node != C])
+                old_alpha = self.ldpc_graph[V][C]['alpha']
                 self.ldpc_graph[V][C]['alpha'] = np.sum(in_messages, axis=0)
                 self.ldpc_graph[V][C]['alpha'] += self.ldpc_graph.nodes[V]['gamma']
+                if self.self_correcting:
+                    check = ((np.sign(self.ldpc_graph[V][C]['alpha']) != np.sign(old_alpha)) & (old_alpha != 0))
+                    self.ldpc_graph[V][C]['alpha'][check] = 0
 
             # A-posteriori information
             for V in self.var_nodes:
