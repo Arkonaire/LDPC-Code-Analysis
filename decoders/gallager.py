@@ -40,7 +40,7 @@ class Gallager(LDPCDecoder):
         """
 
         # Initialize decoder input
-        gamma = y.reshape((-1, self.block_length))
+        gamma = np.sign(y.reshape((-1, self.block_length))).astype(int)
         for i in range(self.block_length):
             self.ldpc_graph.nodes[f'V{i}']['gamma'] = gamma[:, i]
 

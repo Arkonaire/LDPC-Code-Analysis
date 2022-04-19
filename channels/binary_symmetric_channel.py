@@ -24,3 +24,13 @@ class BinarySymmetricChannel(ClassicalChannel):
         e = (np.random.rand(*x.shape) < self.alpha).astype(int)
         y = ((x + e) % 2).astype(int)
         return 1 - 2 * y
+
+    def log_likelihood_ratio(self, y: np.ndarray) -> np.ndarray:
+
+        """Evaluate the Log Likelihood Ratio for the inputs given the channel output.
+        Args:
+            y: Received codeword.
+        Returns:
+            LLR of the inputs given received y.
+        """
+        return y * np.log((1 - self.alpha) / self.alpha)

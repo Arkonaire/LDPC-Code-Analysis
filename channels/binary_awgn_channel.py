@@ -24,3 +24,13 @@ class BinaryAWGNChannel(ClassicalChannel):
         e = np.random.normal(0, self.sigma, size=x.shape)
         y = 1 - 2*x + e
         return y
+
+    def log_likelihood_ratio(self, y: np.ndarray) -> np.ndarray:
+
+        """Evaluate the Log Likelihood Ratio for the inputs given the channel output.
+        Args:
+            y: Received codeword.
+        Returns:
+            LLR of the inputs given received y.
+        """
+        return 2 * y / (self.sigma ** 2)

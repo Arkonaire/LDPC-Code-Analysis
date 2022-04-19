@@ -24,3 +24,17 @@ class BinaryErasureChannel(ClassicalChannel):
         e = (np.random.rand(*x.shape) >= self.epsilon).astype(int)
         y = ((1 - 2 * x) * e).astype(int)
         return y
+
+    def log_likelihood_ratio(self, y: np.ndarray) -> np.ndarray:
+
+        """Evaluate the Log Likelihood Ratio for the inputs given the channel output.
+        Args:
+            y: Received codeword.
+        Returns:
+            LLR of the inputs given received y.
+        """
+        y = y.astype(int)
+        llr = np.zeros_like(y, dtype=float)
+        llr[y > 0] = np.inf
+        llr[y < 0] = -np.inf
+        return llr
